@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy 
 from flask_marshmallow import Marshmallow 
 from flask_restful import Resource, Api
+import socket
 
 app = Flask(__name__) 
 api = Api(app) 
@@ -63,8 +64,8 @@ class TwoFATokenManager(Resource):
         if not id:
             return jsonify({ 'Message': 'Must provide the token ID' })
 
-        secretKey = request.json['name']
-        name = request.json['secretKey']
+        name = request.json['name']
+        secretKey = request.json['secretKey']
         digitCount = request.json['digitCount']
 
         token.secretKey = secretKey
@@ -98,6 +99,11 @@ api.add_resource(TwoFATokenManager, '/api/tokens')
 def create_tables():
     db.create_all()
 
+hostname = socket.gethostname()
+local_ip = socket.gethostbyname(hostname)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host=local_ip, debug=True)
+    print("Local IP Address: " + local_ip)
         

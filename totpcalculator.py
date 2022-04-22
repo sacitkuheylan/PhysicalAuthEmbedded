@@ -3,28 +3,34 @@ import sqlalchemy as db
 from sqlalchemy import inspect
 
 engine = db.create_engine('sqlite:///tokens.db')
-
-"""
-inspector = inspect(engine)
-print(inspector.get_table_names())
-for table_name in inspector.get_table_names():
-   for column in inspector.get_columns(table_name):
-       print("Column: %s" % column['name'])
-"""
-
 connection = engine.connect()
 metadata = db.MetaData()
 TwoFAToken = db.Table('two_fa_token', metadata, autoload=True, autoload_with=engine)
-query = db.select([TwoFAToken.columns.secretKey]).where(TwoFAToken.columns.id == 2)
-query2 = db.select([TwoFAToken.columns.secretKey])
-data = connection.execute(query).scalar()
 
-ResultProxy = connection.execute(query2)
-ResultSet = ResultProxy.fetchall()
+def getIDList():
+    query = db.select([TwoFAToken.columns.id]) 
+    ResultProxy = connection.execute(query)
+    ResultSet = ResultProxy.fetchall()
+    print(ResultSet)
 
-print(data)
-print(ResultSet[:2])
 
-calculatedToken = pyotp.TOTP(data)
+def getSecretKey(id):
+    query = db.select([TwoFAToken.columns.secretKey]).where(TwoFAToken.columns.id == id)
+    query1 = db.select([TwoFAToken.columns.name]).where(TwoFAToken.columns.id == id)
+    query2 = db.select([TwoFAToken.columns.digitCount]).where(TwoFAToken.columns.id == id)
+    data = connection.execute(query).scalar()
+    data1 = connection.execute(query1).scalar()
+    data2 = connection.execute(query2).scalar()
+    print("***Key Details***")
+    print("Name: " + data1)
+    print("Secret Key: " + data)
+    print("Digit Count: " + str(data2))
+    return data
+
+#TODO: Make calling secretKey details more generic. This or ordered call system won't work when token deletion occurs
+for i in range(1,4):
+    calculatedToken = pyotp.TOTP(getSecretKey(i))
+    print("Calculated Token: " + str(calculatedToken.now()))
+
 
 
