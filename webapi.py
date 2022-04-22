@@ -6,7 +6,7 @@ from flask_restful import Resource, Api
 
 app = Flask(__name__) 
 api = Api(app) 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db' 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tokens.db' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db = SQLAlchemy(app) 
 ma = Marshmallow(app)
@@ -14,7 +14,7 @@ ma = Marshmallow(app)
 class TwoFAToken(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), unique=True)
-    secretKey = db.Column(db.String(32))
+    secretKey = db.Column(db.String(256))
     digitCount = db.Column(db.Integer)
 
     def __init__(self, name, secretKey, digitCount):
