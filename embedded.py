@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+
+"""
+
+This version is depreciated because of problems with sqlite. Instead this new source is available at webapi.py file.
+
+
+
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -114,4 +121,4 @@ def api_get_users():
 def api_get_user(user_id):
     return jsonify(get_key_by_id(user_id))
 app.run(host='0.0.0.0')
-
+"""
