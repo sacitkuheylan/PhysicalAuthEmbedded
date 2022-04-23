@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow 
 from flask_restful import Resource, Api
 import socket
+import subprocess
 
 app = Flask(__name__) 
 api = Api(app) 
@@ -99,11 +100,12 @@ api.add_resource(TwoFATokenManager, '/api/tokens')
 def create_tables():
     db.create_all()
 
-hostname = socket.gethostname()
-local_ip = socket.gethostbyname(hostname)
+cmd = "hostname -I | cut -d\' \' -f1"
+IP = subprocess.check_output(cmd, shell = True )
 
+print("IP: " + str(IP))
 
 if __name__ == '__main__':
-    app.run(host=local_ip, debug=True)
+    app.run(host="0.0.0.0", debug=True)
     print("Local IP Address: " + local_ip)
         
