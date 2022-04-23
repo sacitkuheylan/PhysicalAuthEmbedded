@@ -39,9 +39,6 @@ for i in range(1,4):
     calculatedToken = pyotp.TOTP(getSecretKey(i))
     print("Calculated Token: " + str(calculatedToken.now()))
 
-
-calculatedTokenToDisplay = pyotp.TOTP(getSecretKey(2))
-
 RST = None   
 DC = 23
 SPI_PORT = 0
@@ -70,7 +67,7 @@ font = ImageFont.load_default()
 while True:
     draw.rectangle((0,0,width,height), outline=0, fill=0)
     #draw.text((x+30, top),       "Github",  font=font, fill=255)
-    draw.text((x+50, top+10),    str(calculatedToken.now()), font=font, fill=255)
+    draw.text((x+50, top+10), pyotp.TOTP(getSecretKey(1).now(), font=font, fill=255)
     #draw.text((x+30, top+20),   "Remaining Time: 30",  font=font, fill=255)
     disp.image(image)
     disp.display()
