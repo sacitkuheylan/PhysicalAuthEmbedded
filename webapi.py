@@ -100,11 +100,6 @@ api.add_resource(TwoFATokenManager, '/api/tokens')
 def create_tables():
     db.create_all()
 
-cmd = "hostname -I | cut -d\' \' -f1"
-IP = subprocess.check_output(cmd, shell = True )
-
-print("IP: " + str(IP))
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
         
