@@ -78,7 +78,7 @@ bottom = height-padding
 x = 0
 
 font = ImageFont.load_default()
-buttonCounter = 1
+buttonCounter = 0
 
 while True:
     if buttonCounter < len(secretKeyList):
@@ -91,7 +91,7 @@ while True:
             
     draw.rectangle((0,0,width,height), outline=0, fill=0)
     draw.text((x+30, top),       "Counter:" + str(buttonCounter),  font=font, fill=255)
-    draw.text((x+50, top+10), str(pyotp.TOTP(getSecretKey(buttonCounter)).now()), font=font, fill=255)
+    draw.text((x+50, top+10), str(pyotp.TOTP(secretKeyList[buttonCounter]).now()), font=font, fill=255)
     #draw.text((x+30, top+20),   "Remaining Time: 30",  font=font, fill=255)
     disp.image(image)
     disp.display()
