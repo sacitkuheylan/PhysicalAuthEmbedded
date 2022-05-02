@@ -40,14 +40,14 @@ def getSecretKey(id):
     return data
 
 #TODO: Make calling secretKey details more generic. This or ordered call system won't work when token deletion occurs
-secretKeyList = []
+
 #for i in range(1,4):
 #    data = getSecretKey(i)
 #    secretKeyList.append(data)
 #    calculatedToken = pyotp.TOTP(data)
 #    print("Calculated Token: " + str(calculatedToken.now()))
-
-def getSecretKeyAsList(): 
+secretKeyList = [] 
+def getSecretKeyAsList():
    for row in connection.execute(db.select(TwoFAToken.columns.secretKey)):
        print(row)
        secretKeyList.append("".join(filter(str.isalnum, row)))
@@ -81,13 +81,13 @@ font = ImageFont.load_default()
 buttonCounter = 0
 
 while True:
-    if buttonCounter < len(secretKeyList):
+    if buttonCounter < len(secretKeyList)-1:
         if GPIO.input(15) == GPIO.HIGH:
             buttonCounter = buttonCounter + 1
             time.sleep(0.8)
-    elif buttonCounter == len(secretKeyList):
+    elif buttonCounter == len(secretKeyList)-1:
         if GPIO.input(15) == GPIO.HIGH:
-            buttonCounter = 1
+            buttonCounter = 0  
             
     draw.rectangle((0,0,width,height), outline=0, fill=0)
     draw.text((x+30, top),       "Counter:" + str(buttonCounter),  font=font, fill=255)
