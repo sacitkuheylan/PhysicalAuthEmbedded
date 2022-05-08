@@ -25,7 +25,7 @@ Hi! :wave: Thank you for your interest in **PhysicalAuth**. This page contains i
  - [Database Structure](#database-structure)
  - [Gallery](#gallery)
  - [Contribution](#contribution)
- - [LICENSES](#licenses)
+ - [LICENSE](#license)
 
 
 
@@ -134,6 +134,8 @@ PhysicalAuth uses **SQLite** in the background to store entries. There is one ta
 <p align="center" href="https://ibb.co/7zRfhM8"><img src="https://i.ibb.co/H2xSZw1/Whats-App-Image-2022-05-08-at-22-10-30.jpg" alt="Whats-App-Image-2022-05-08-at-22-10-30" border="0"></p>
 
 > I know it doesn't looks much appetizing for now :smiley: but it will look better I promise
+
+<p align="center" href="https://imgbb.com/"><img src="https://i.ibb.co/HT15QbW/Screenshot-3.png" alt="Screenshot-3" border="0"></p>
 
 # Contribution
 Everybody who is passionate about developing information security and also software is welcome to make contributions. You can open a pull request and write a summary about your contribution.
