@@ -1,0 +1,11 @@
+time
+Adafruit_GPIO
+Adafruit_SSD1306
+PIL
+subprocess
+lib2to3.pgen2
+flask 
+flask_sqlalchemy 
+flask_marshmallow
+flask_restful
+socket
