@@ -73,7 +73,7 @@ Hardware and Software Requirements are as following. I am still developing and t
    
 
 # Getting Ready
-In this section there are 2 different guides needed to follow. First one is setting the **Software Enviroment** and the second one is **Wiring Up Hardware**.
+In this section there are 2 different guides needed to follow. First one is **Wiring Up Hardware**.  and the second one is setting **Software Enviroment**
 
 ## Hardware
 
