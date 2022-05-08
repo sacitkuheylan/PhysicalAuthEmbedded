@@ -22,7 +22,6 @@ Hi! :wave: Thank you for your interest in **PhysicalAuth**. This page contains i
 	 - [Hardware Requirements](#hardware-requirements)
 	 - [Software Requirements](#software-requirements)
  - [Wiring Up Hardware](#wiring-up-hardware)
- - [State Diagram](#state-diagram-of-physicalauth)
  - [Database Structure](#database-structure)
  - [Gallery](#gallery)
  - [Contribution](#contribution)
@@ -130,12 +129,11 @@ PhysicalAuth uses **SQLite** in the background to store entries. There is one ta
  - secretKey: This is the secret key given from application.
  - digitCount: This is the digit count of token that is going to be generated. It is usally 6.
 
-# State Diagram of PhysicalAuth Embedded
-The state diagram below shows how PhysicalAuth Embedded Software Works
-
-> State Diagram of PhysicalAuth Embedded
-
 # Gallery
+
+<p align="center" href="https://ibb.co/7zRfhM8"><img src="https://i.ibb.co/H2xSZw1/Whats-App-Image-2022-05-08-at-22-10-30.jpg" alt="Whats-App-Image-2022-05-08-at-22-10-30" border="0"></p>
+
+> I know it doesn't looks much appetizing for now :smiley: but it will look better I promise
 
 # Contribution
 Everybody who is passionate about developing information security and also software is welcome to make contributions. You can open a pull request and write a summary about your contribution.
