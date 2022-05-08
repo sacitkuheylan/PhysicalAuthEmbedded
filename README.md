@@ -80,7 +80,7 @@ In this section there are 2 different guides needed to follow. First one is **Wi
 ### Wiring Up Hardware
 
 
-With help of a breadborad, we connect our OLED Screen and RTC Module using I2C (Inter-Interconnected Circuit) Interface. Also we need a push button for changing selected token.
+With help of a breadborad, we connect our OLED Screen and RTC Module using I2C (Inter-Integrated Circuit) Interface. Also we need a push button for changing selected token.
 
 <p align="center" href="https://ibb.co/GcPF4y0"><img src="https://i.ibb.co/Tmhrx6k/Screenshot-1.png" alt="Screenshot-1" border="0"></p>
 
