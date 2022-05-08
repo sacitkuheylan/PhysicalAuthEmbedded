@@ -38,7 +38,7 @@ This repo contains software that you are going to deploy on your embedded device
  - tokengenerator.py
 	 - This is the token calculator application. It communicates with local database that is developed using SQLite and it calculates 6 digit **TOTP** (Time-Based One Time Password) from secret keys that are stored in database.
 
-**Next Milestone:** There is a plan to migrate those two project into one single executeable file. With this way resource consume will be decreased.
+**Next Milestone:** There is a plan to migrate those two project into one single executeable file. With this way resource consumption will be decreased.
 
 #### Libraries Used
 
@@ -64,6 +64,7 @@ Hardware and Software Requirements are as following. I am still developing and t
 	 - An OLED Screen (I have used 0.91" **SSD1306**)
 	 - A Real Time Clock Module (I have used **PCF8523**)
 	 - Some Jumper Wires
+	 - A Push Button
  - #### Software Requirements
 	 - A Linux Distrubution capable to run Python
 	 - Required Python Packages are listed at [Libraries Used](#libraries-used) and installation guide is at [Setting Up Enviroment](#setting-up-enviroment)
