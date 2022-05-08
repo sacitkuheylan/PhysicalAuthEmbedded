@@ -9,3 +9,5 @@ flask_sqlalchemy
 flask_marshmallow
 flask_restful
 socket
+pyotp
+sqlalchemy
