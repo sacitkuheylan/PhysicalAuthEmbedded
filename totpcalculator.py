@@ -9,6 +9,8 @@ from PIL import ImageDraw
 from PIL import ImageFont
 import subprocess
 import RPi.GPIO as GPIO
+import datetime
+import socket
 
 engine = db.create_engine('sqlite:///tokens.db')
 connection = engine.connect()
@@ -46,11 +48,16 @@ def getSecretKey(id):
 #    secretKeyList.append(data)
 #    calculatedToken = pyotp.TOTP(data)
 #    print("Calculated Token: " + str(calculatedToken.now()))
-secretKeyList = [] 
+secretKeyList = []
+nameList = []
+
 def getSecretKeyAsList():
    for row in connection.execute(db.select(TwoFAToken.columns.secretKey)):
        print(row)
        secretKeyList.append("".join(filter(str.isalnum, row)))
+   for row in connection.execute(db.select(TwoFAToken.columns.name)):
+       print(row)
+       nameList.append("".join(filter(str.isalnum, row)))
 
 getSecretKeyAsList()
 
@@ -79,22 +86,50 @@ x = 0
 
 font = ImageFont.load_default()
 buttonCounter = 0
+ipShownFlag = False
+
+def extract_ip():
+    st = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:       
+        st.connect(('10.255.255.255', 1))
+        IP = st.getsockname()[0]
+    except Exception:
+        IP = '127.0.0.1'
+    finally:
+        st.close()
+    return IP
 
 while True:
-    if buttonCounter < len(secretKeyList)-1:
-        if GPIO.input(15) == GPIO.HIGH:
-            buttonCounter = buttonCounter + 1
-            time.sleep(0.8)
-    elif buttonCounter == len(secretKeyList)-1:
-        if GPIO.input(15) == GPIO.HIGH:
-            buttonCounter = 0  
-            
-    draw.rectangle((0,0,width,height), outline=0, fill=0)
-    draw.text((x+30, top),       "Counter:" + str(buttonCounter),  font=font, fill=255)
-    draw.text((x+50, top+10), str(pyotp.TOTP(secretKeyList[buttonCounter]).now()), font=font, fill=255)
-    #draw.text((x+30, top+20),   "Remaining Time: 30",  font=font, fill=255)
-    disp.image(image)
-    disp.display()
+    
+    if GPIO.input(15) == GPIO.HIGH:
+        ipShownFlag = True
+    
+    if ipShownFlag == True:
+        if buttonCounter < len(secretKeyList)-1:
+            if GPIO.input(15) == GPIO.HIGH:
+                buttonCounter = buttonCounter + 1
+                time.sleep(0.8)
+        elif buttonCounter == len(secretKeyList)-1:
+            if GPIO.input(15) == GPIO.HIGH:
+                buttonCounter = 0
+                secretKeyList = []
+                nameList = []
+                getSecretKeyAsList()
+                
+        draw.rectangle((0,0,width,height), outline=0, fill=0)
+        draw.text((x+40, top), str(nameList[buttonCounter]),  font=font, fill=255)
+        draw.text((x+50, top+10), str(pyotp.TOTP(secretKeyList[buttonCounter]).now()), font=font, fill=255)
+        now = datetime.datetime.now()
+        draw.text((x+60, top+20),   now.strftime("%S"),  font=font, fill=255)
+        disp.image(image)
+        disp.display()
+    else:
+        draw.rectangle((0,0,width,height), outline=0, fill=0)
+        draw.text((x+30, top+10), extract_ip(), font=font, fill=255)
+        draw.text((x+30, top+20),   "IP ADDRESS",  font=font, fill=255)
+        disp.image(image)
+        disp.display()
+        
     
     
 
