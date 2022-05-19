@@ -118,9 +118,12 @@ while True:
                 
         draw.rectangle((0,0,width,height), outline=0, fill=0)
         draw.text((x+40, top), str(nameList[buttonCounter]),  font=font, fill=255)
-        draw.text((x+50, top+10), str(pyotp.TOTP(secretKeyList[buttonCounter]).now()), font=font, fill=255)
+        draw.text((x+53, top+15), str(pyotp.TOTP(secretKeyList[buttonCounter]).now()), font=font, fill=255)
         now = datetime.datetime.now()
-        draw.text((x+60, top+20),   now.strftime("%S"),  font=font, fill=255)
+        if int(now.strftime("%S")) < 30:
+            draw.text((x+17, top+25), "Remaining Time:" + str((30 - int(now.strftime("%S")))),  font=font, fill=255)
+        else:
+            draw.text((x+17, top+25), "Remaining Time:" +   str((60 - int(now.strftime("%S")))),  font=font, fill=255)
         disp.image(image)
         disp.display()
     else:
